@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Upload</title>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var supportMultiFile = function () {
+			var inp = document.createElement("input");
+			inp.setAttribute("multiple", "true");
+			var supportsMultiple = inp.multiple===true;
+			return supportsMultiple;
+		}
+
+		var supportXHR2 = function () {
+			if (new XMLHttpRequest().upload) {
+				// alert("support!")
+			} else {
+				// alert("sorry!");
+			}
+		}
+		
+
+		$(function () {
+			$('button#clear').click(function () {
+				var control = $(".file");
+				control.replaceWith(control.val('').clone(true));
+			})				
+
+			$('button#check').click(function () {
+				if ($('.file')[0].files) alert('support!');
+				console.log($('.file')[0].files); //file list
+			})
+		})
+
+	</script>
+</head>
+<body>
+	<button id="clear" class="btn">clear</button>
+	<button id="check" class="btn">check</button>
+	<form target="upload-frame" method="post" action="/upload" enctype="multipart/form-data">
+		<input id="file" class="file" type="file" name="image" multiple>
+		<input type="submit" value="提交">
+	</form>
+	<iframe name="upload-frame" src=""></iframe>
+</body>
+</html>
