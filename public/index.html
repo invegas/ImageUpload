@@ -3,6 +3,16 @@
 <head>
 	<title>Image Upload</title>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<style type="text/css">
+		#drop-area {
+			width: 100px;
+			height: 100px;
+			border: 1px dashed black;
+		}
+		.is-occupy {
+			background: gray;
+		}
+	</style>
 	<script type="text/javascript">
 		var supportMultiFile = function () {
 			var inp = document.createElement("input");
@@ -13,10 +23,27 @@
 
 		var supportXHR2 = function () {
 			if (new XMLHttpRequest().upload) {
-				// alert("support!")
-			} else {
-				// alert("sorry!");
+				alert("support!");
 			}
+		}
+
+		var fileSelect = function (files) {
+			$('.file')[0].files = files;
+			// for (var i = 0; i < files.length; i++) {
+			// 	var f = files[i];
+			// 	var reader = new FileReader();
+			// 	reader.load = function (e) {
+
+			// 	}
+			// }
+		}
+
+		var dropIt = function (e) {
+			console.log(e);
+			console.log(e.dataTransfer);
+			fileSelect(e.dataTransfer.files);
+			e.stopPropagation();  
+			e.preventDefault(); 
 		}
 		
 
@@ -28,19 +55,37 @@
 
 			$('button#check').click(function () {
 				if ($('.file')[0].files) alert('support!');
-				console.log($('.file')[0].files); //file list
 			})
+
+			$('button#check_xhr2').click(function () {
+				supportXHR2();
+			})
+
+			// drop
+			$('#drop-area')[0].addEventListener('drop', dropIt, false);
+			// $('#drop-area').on('drop', dropIt);
+
+
+			// drag over
+			// $('#drop-area').on('dragover', function (e) {
+			// 	$(this).addClass('is-occupy');
+			// });
+			// $('#drop-area')[0].addEventListener('dragover', function (e) {
+			// 	$(this).addClass('is-occupy');
+			// }, false);
 		})
 
 	</script>
 </head>
 <body>
 	<button id="clear" class="btn">clear</button>
-	<button id="check" class="btn">check</button>
+	<button id="check" class="btn">check FileList</button>
+	<button id="check_xhr2" class="btn">check XHR2</button>
 	<form target="upload-frame" method="post" action="/upload" enctype="multipart/form-data">
 		<input id="file" class="file" type="file" name="image" multiple>
 		<input type="submit" value="提交">
 	</form>
-	<iframe name="upload-frame" src=""></iframe>
+	<iframe width="50" height="50" name="upload-frame" src=""></iframe>
+	<div id="drop-area" ondragenter="return false" ondragover="return false">drop here</div>
 </body>
 </html>
