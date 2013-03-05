@@ -48,10 +48,19 @@
 			e.stopPropagation();  
 			e.preventDefault(); 
 		}
+
+		var dropItQuery = function (e) {
+			var ev = e.originalEvent;
+			console.log(ev);
+			ev.stopPropagation();
+			ev.preventDefault();
+			return false;
+		}
 		
 
 		$(function () {
-			$('button#clear').click(function () {
+			$('button#clear').click(function (e) {
+				console.log(e);
 				var control = $(".file");
 				control.replaceWith(control.val('').clone(true));
 			})				
@@ -65,8 +74,8 @@
 			})
 
 			// drop
-			$('#drop-area')[0].addEventListener('drop', dropIt, false);
-			// $('#drop-area').on('drop', dropIt);
+			// $('#drop-area')[0].addEventListener('drop', dropIt, false);
+			$('#drop-area').on('drop', dropItQuery);
 
 
 			// drag over

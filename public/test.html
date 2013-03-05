@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		window.fileReader = (function () {
+
+			var read = function (file) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					console.log(e.target);
+				};
+
+			    // reader.readAsDataURL(file);
+			};
+
+			return {
+				read: read
+			};
+		})();
+
+		fileReader.read();
+	</script>
+</head>
+<body>
+
+</body>
+</html>

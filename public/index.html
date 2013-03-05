@@ -19,10 +19,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="span6 offset3 upload">
-				<div class="upload-wrap">
-					<h4 id="upload-image-name">暂无文件</h4>
+				<div class="upload-wrap" draggable="true" ondragenter="return false" ondragover="return false">
+					<h4 id="upload-image-name" class="invisible">暂无文件</h4>
 					<form class="upload-form" target="for-response" method="post" action="/upload" enctype="multipart/form-data">
-						<input id="btn-file-select" type="button" class="btn btn-large" value="选择图片">
+						<input id="btn-file-select" type="button" class="btn btn-large" value="选择上传图片">
 						<input id="btn-file-image" type="file" name="image" class="hide">
 					</form>
 					<h2 class="tip-drag">还可以把图片拖拽到这</h2>
@@ -37,9 +37,14 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>	
+	<script type="text/javascript" src="/js/lib/jquery-1.9.1.min.js"></script>	
+	<script type="text/javascript" src="/js/module/filereader.js"></script>		
+	<script type="text/javascript" src="/js/module/drag.js"></script>
+
 	<script type="text/javascript">
 		$(function () {
+			Drag.init($('.upload-wrap'));
+
 			// 选择文件
 			$('#btn-file-select').click(function () {
 				$('#btn-file-image').click();
