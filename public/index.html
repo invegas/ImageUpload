@@ -18,21 +18,28 @@
 	</div>			
 	<div class="container">
 		<div class="row">
-			<div class="span6 offset3 upload">
-				<div class="upload-wrap" draggable="true" ondragenter="return false" ondragover="return false">
-					<h4 id="upload-image-name" class="invisible">暂无文件</h4>
-					<form class="upload-form" target="for-response" method="post" action="/upload" enctype="multipart/form-data">
-						<input id="btn-file-select" type="button" class="btn btn-large" value="选择上传图片">
-						<input id="btn-file-image" type="file" name="image" class="hide">
+			<div class="cpt-alert alert span6 offset3">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Warning!</strong> Best check yo self, you're not looking too good.
+			</div>
+			<div class="span6 offset3">
+				<div class="cpt-upload cpt-upload-leave" ondragenter="return false" ondragover="return false">
+					<img class="cpt-preview hide" src="">
+					<h4 class="text-align-center cpt-file_name invisible">暂无文件</h4>
+					<form class="cpt-upload-form" target="for-response" method="post" action="/upload" enctype="multipart/form-data">
+						<input id="btn-select" type="button" class="btn btn-large" value="选择上传图片">
+						<input id="btn-confirm" type="button" class="btn btn-primary btn-large" value="确定">
+						<input id="btn-cancel" type="button" class="btn btn-primary btn-large" value="取消">
+						<input id="btn-file" type="file" name="image" class="hide">
 					</form>
-					<h2 class="tip-drag">还可以把图片拖拽到这</h2>
+					<h2 class="text-align-center opacity-low">还可以把图片拖拽到这</h2>
 					<iframe src="" class="hide" name="for-response"></iframe>
 				</div>
-				<div class="progress-component hide">
-					<div class="hide progress progress-striped active">
+				<div class="cpt-progress">
+					<div class="progress progress-striped active">
 						<div class="bar" style="width: 10%;"></div>
 					</div>
-					<h4 class="tip-upload-status">等待上传</h4>				
+					<h4 class="text-align-center">正在上传</h4>				
 				</div>
 			</div>
 		</div>
@@ -43,7 +50,6 @@
 
 	<script type="text/javascript">
 		$(function () {
-			Drag.init($('.upload-wrap'));
 
 			// 选择文件
 			$('#btn-file-select').click(function () {
