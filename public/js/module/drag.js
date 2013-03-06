@@ -1,6 +1,6 @@
 /* drag and drop module */
 
-window.Drag = (function (reader) {
+window.Drag = (function () {
 
 	var isSupport = function () {
 
@@ -10,42 +10,32 @@ window.Drag = (function (reader) {
 		return false
 	}
 
+	var removeBind = function (el) {
+		el.off('dragenter').off('dragover').off('dragover').off('dragleave').off('drop');
+	}
+
 	var init = function (el) {
-
-		if (!isSupport()) return;
-
-		// show drop area
-		el.addClass('allow-drag');
-
+		console.log('drag init!');
 		// event bind
 		el.on('dragenter', function (e) {
 			return false;
 		}).on('dragover', function (e) {
-			$(this).addClass('drag-over');
+			$(this).addClass('cpt-upload-over');
 			return false;
 		}).on('dragleave', function () {
-			$(this).removeClass('drag-over');
+			$(this).removeClass('cpt-upload-over');
 		}).on('drop', function (e) {
 			var ev = e.originalEvent,
 				file = ev.dataTransfer.files[0];
 
-			var callback = function (data) {
-				el.css({
-					'background-image': 'url(' + data + ')'
-				})
-				el.css({
-					// 'opacity': 0.1
-				})
-			}
+			console.log(file);
 
-			reader.read(file, callback);
 			return false;
 		})
 
 	}
 
 	return {
-		isSupport: isSupport,
 		init: init
 	}
-})(fileReader);
+})();

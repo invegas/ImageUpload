@@ -1,79 +1,129 @@
 window.config_global = {
-	component_list: ["cpt-alert", "cpt-upload", "cpt-file_name", "cpt-preview", "btn-select", "btn-confirm", "btn-cancel", "btn-file", "cpt-progress"]
+	component_list: [
+		{
+			name: "alert",
+			class: "cpt-alert"
+		},
+		{
+			name: "upload",
+			class: "cpt-upload"
+		},
+		{
+			name: "file_name",
+			class: "cpt-file_name"
+		},
+		{
+			name: "preview",
+			class: "cpt-preview"
+		},
+		{
+			name: "select",
+			class: "btn-select"
+		},
+		{
+			name: "confirm",
+			class: "btn-confirm"
+		},
+		{
+			name: "cancel",
+			class: "btn-cancel"
+		},						 
+		{
+			name: "file",
+			class: "btn-file"
+		},			
+		{
+			name: "progress",
+			class: "cpt-progress"
+		}					 		
+	],
+	action_list: {
+		add_drag: {
+			fn: Drag.init,
+			param: [
+				{
+					type: "jquery",
+					value: ".cpt-upload"
+				}
+			]
+		}
+	}
+		
 }
 
 window.config_html5 = {
 	wait: {
 		available_cpt: {
-			cpt-upload: {
+			upload: {
 				type: 'text',
 				value: '还可以把图片拖拽到这'
 			},
-			btn-select: {
+			select: {
 				type: 'button'
 			}
-		}		
+		},
+		action: ["add_drag"]
 	},
 	ready: {
 		available_cpt: {
-			cpt-upload: {
+			upload: {
 				type: 'text',
 				value: '可以上传了'
 			},
-			cpt-file_name: {
+			file_name: {
 				type: 'text'
 			},
-			cpt-preview: {
+			preview: {
 				type: 'img'
 			},
-			btn-select: {
+			select: {
 				type: 'button'
 			},						
-			btn-confirm: {
+			confirm: {
 				type: 'button'
 			}			
 		}		
 	},
 	upload: {
 		available_cpt: {
-			cpt-upload: {
+			upload: {
 				type: 'text',
 				value: '正在上传'
 			},
-			cpt-file_name: {
+			file_name: {
 				type: 'text'
 			},
-			cpt-preview: {
+			preview: {
 				type: 'img'
 			},
-			btn-cancel: {
+			cancel: {
 				type: 'button'
 			},
-			cpt-progress: {
+			progress: {
 				type: 'text',
 				value: '正在上传'
 			},
-			cpt-preview: {
+			preview: {
 				type: 'img'
 			}
 		}		
 	},
 	complete: {
 		available_cpt: {
-			cpt-upload: {
+			upload: {
 				type: 'text',
 				value: '上传成功'
 			},
-			cpt-file_name: {
+			file_name: {
 				type: 'text'
 			},
-			cpt-preview: {
+			preview: {
 				type: 'img'
 			},
-			btn-select: {
+			select: {
 				type: 'button'
 			},
-			cpt-progress: {
+			progress: {
 				type: 'text',
 				value: '上传成功'
 			}
