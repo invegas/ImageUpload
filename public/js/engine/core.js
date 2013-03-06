@@ -47,7 +47,7 @@ window.Engine = (function () {
 			var fn = act_list[acts[i]]["fn"],
 				param = act_list[acts[i]]["param"];	//参数有可能是数组
 
-			console.log(param);
+			var param_length = param.length;
 
 			fn(convertParam(param.type, param.val));
 		}
