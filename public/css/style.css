@@ -38,10 +38,16 @@ body {
 .cpt-upload {
 	background: none;
 	height: 200px;
+	position: relative;
 }
 .cpt-progress {
 	margin-top: 20px;
 }
 .cpt-upload-form {
 	text-align: center;
+}
+.cpt-preview {
+	position: absolute;
+	left: 0;
+	top: 0;
 }

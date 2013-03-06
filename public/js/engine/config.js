@@ -1,9 +1,13 @@
 window.config_global = {
+	file: {
+		type: ["image/jpeg", "image/png"],
+		maxSize: 1000000 * 5
+	},
 	component_list: [
-		{
-			name: "alert",
-			class: "cpt-alert"
-		},
+		// {
+		// 	name: "alert",
+		// 	class: "cpt-alert"
+		// },
 		{
 			name: "upload",
 			class: "cpt-upload"
@@ -46,7 +50,16 @@ window.config_global = {
 					value: ".cpt-upload"
 				}
 			]
-		}
+		},
+		remove_drag: {
+			fn: Drag.offEvent,
+			param: [
+				{
+					type: "jquery",
+					value: ".cpt-upload"
+				}
+			]
+		}		
 	}
 		
 }
@@ -59,10 +72,11 @@ window.config_html5 = {
 				value: '还可以把图片拖拽到这'
 			},
 			select: {
-				type: 'button'
+				type: 'button',
+				value: '选择上传图片'
 			}
 		},
-		action: ["add_drag"]
+		action: ["remove_drag", "add_drag"]
 	},
 	ready: {
 		available_cpt: {
@@ -71,13 +85,14 @@ window.config_html5 = {
 				value: '可以上传了'
 			},
 			file_name: {
-				type: 'text'
+				type: 'file'
 			},
 			preview: {
 				type: 'img'
 			},
 			select: {
-				type: 'button'
+				type: 'button',
+				value: '点我重新选择'
 			},						
 			confirm: {
 				type: 'button'

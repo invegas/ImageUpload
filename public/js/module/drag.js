@@ -10,7 +10,8 @@ window.Drag = (function () {
 		return false
 	}
 
-	var removeBind = function (el) {
+	var offEvent = function (el) {
+		console.log('off event');
 		el.off('dragenter').off('dragover').off('dragover').off('dragleave').off('drop');
 	}
 
@@ -25,10 +26,11 @@ window.Drag = (function () {
 		}).on('dragleave', function () {
 			$(this).removeClass('cpt-upload-over');
 		}).on('drop', function (e) {
+			$(this).removeClass('cpt-upload-over');
 			var ev = e.originalEvent,
 				file = ev.dataTransfer.files[0];
 
-			console.log(file);
+			Engine.updateData(file);
 
 			return false;
 		})
@@ -36,6 +38,7 @@ window.Drag = (function () {
 	}
 
 	return {
-		init: init
+		init: init,
+		offEvent: offEvent
 	}
 })();

@@ -18,17 +18,17 @@
 	</div>			
 	<div class="container">
 		<div class="row">
-			<div class="cpt-alert alert span6 offset3">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<strong>Warning!</strong> Best check yo self, you're not looking too good.
+			<div class="cpt-alert alert span6 offset3 invisible">
+					<button type="button" class="cpt-alert-close close " data-dismiss="alert">&times;</button>
+					<span class="text">Best check yo self, you're not looking too good.</span> 
 			</div>
 			<div class="span6 offset3">
 				<div class="cpt-upload cpt-upload-leave" ondragenter="return false" ondragover="return false">
-					<img class="cpt-preview hide" src="">
-					<h4 class="text-align-center cpt-file_name invisible">暂无文件</h4>
+					<img class="cpt-preview" src="">
+					<h4 class="text-align-center cpt-file_name invisible text">暂无文件</h4>
 					<form class="cpt-upload-form" target="for-response" method="post" action="/upload" enctype="multipart/form-data">
 						<input id="" type="button" class="btn-select btn btn-large" value="选择上传图片">
-						<input id="" type="button" class="btn-confirm btn btn-primary btn-large" value="确定">
+						<input id="" type="submit" class="btn-confirm btn btn-primary btn-large" value="上传">
 						<input id="" type="button" class="btn-cancel btn btn-primary btn-large" value="取消">
 						<input id="" type="file" name="image" class="btn-file hide">
 					</form>
@@ -47,12 +47,21 @@
 	<script type="text/javascript" src="/js/lib/jquery-1.9.1.min.js"></script>	
 	<script type="text/javascript" src="/js/module/drag.js"></script>
 	<script type="text/javascript" src="/js/engine/config.js"></script>
+	<script type="text/javascript" src="/js/module/filereader.js"></script>	
 	<script type="text/javascript" src="/js/engine/render.js"></script>
+	<script type="text/javascript" src="/js/engine/alert.js"></script>
+	<script type="text/javascript" src="/js/engine/ajax.js"></script>
 	<script type="text/javascript" src="/js/engine/core.js"></script>
+	
 
 	<script type="text/javascript">
 		$(function () {
-			Engine.test("wait");
+			Engine.gotoStatus("wait");
+
+			//close alert
+			$('.cpt-alert-close').click(function () {
+				Alert.hide();
+			})
 
 			// 选择文件
 			$('.btn-select').click(function () {
@@ -60,9 +69,19 @@
 			})
 
 			// 已经选择文件，获取名字
-			$('.btn-file-image').change(function () {
-				var name = $(this).val().split('\\');
-				name = name[name.length - 1];
+			$('.btn-file').change(function (e) {
+				var file = e.originalEvent.target.files[0];
+				Engine.updateData(file);
+			})
+
+			$('.btn-confirm').click(function (e) {
+				var ev = e.originalEvent;
+				if (xhr.isSupport()) {
+					ev.stopPropagation();
+					ev.preventDefault();
+					Engine.sendData();
+					return false;
+				}
 			})
 		})	
 	</script>

@@ -24,9 +24,18 @@ window.Render = (function () {
 		}
 	}
 
+	var button = function (btn, content) {
+		$('.' + btn + '').val(content);
+	}
+
+	var progress = function () {
+		
+	}
+
 	return {
 		show: show,
 		hide: hide,
-		text: text
+		text: text,
+		button: button
 	}
 })()

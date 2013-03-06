@@ -21,11 +21,13 @@ var validate = function (img) {
 
 app.post("/upload", function (req, res) {
     var image = req.files.image;
+    console.log(image);
     //首先要处理单个上传和多个上传
     // console.log(image);
     // console.log(image.length);
 
     if (Array.isArray(image)) console.log("is array");
     else console.log("is not array");
+
     res.send("ok");
 })
