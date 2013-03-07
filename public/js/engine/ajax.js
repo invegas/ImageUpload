@@ -13,7 +13,7 @@ window.xhr = (function () {
 	        	total = e.totalSize || e.total;
 	        var percent = (Math.floor(done/total*1000)/10);
 
-            console.log('percent');
+            console.log(percent);
             Render.progress(percent);
 	    }, false);
 
@@ -22,7 +22,7 @@ window.xhr = (function () {
 	            var done = e.position || e.loaded, total = e.totalSize || e.total;
 	            var percent = Math.floor(done/total*1000)/10;
 	            
-	            console.log('percent');
+	            console.log(percent);
 	            Render.progress(percent);
 	        };
 	    }

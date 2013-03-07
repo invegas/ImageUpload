@@ -29,8 +29,8 @@ window.config_global = {
 			class: "btn-confirm"
 		},
 		{
-			name: "cancel",
-			class: "btn-cancel"
+			name: "continue",
+			class: "btn-continue"
 		},						 
 		{
 			name: "file",
@@ -131,6 +131,13 @@ window.config_html5 = {
 			},
 			file_name: {
 				type: 'text'
+			},
+			select: {
+				type: 'button',
+				value: '重新选择上传'
+			},		
+			continue: {
+				type: 'button'
 			},
 			preview: {
 				type: 'img'
