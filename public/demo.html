@@ -14,90 +14,57 @@
 		}
 	</style>
 	<script type="text/javascript">
-		var supportMultiFile = function () {
-			var inp = document.createElement("input");
-			inp.setAttribute("multiple", "true");
-			var supportsMultiple = inp.multiple===true;
-			return supportsMultiple;
-		}
+		$(function () {
+			$('#submit').click(function (e) {
+				var ev = e.originalEvent;
+					ev.stopPropagation();
+					ev.preventDefault();
 
-		var supportXHR2 = function () {
-			if (new XMLHttpRequest().upload) {
-				alert("support!");
-			}
-		}
+				var send = function (file) {
+					var xhr = new XMLHttpRequest();
+				    xhr.addEventListener('progress', function(e) {
+				        var done = e.position || e.loaded, 
+				        	total = e.totalSize || e.total;
 
-		var fileSelect = function (files) {
-			$('.file')[0].files = files;
-			for (var i = 0; i < files.length; i++) {
-				var f = files[i];
-				var reader = new FileReader();
+				        console.log('xhr progress: ' + (Math.floor(done/total*1000)/10) + '%');
+				    }, false);
 
-				reader.onload = function (e) {
-					console.log(e.target);
+				    if ( xhr.upload ) {
+				        xhr.upload.onprogress = function(e) {
+				            var done = e.position || e.loaded, total = e.totalSize || e.total;
+				            console.log('xhr.upload progress: ' + done + ' / ' + total + ' = ' + (Math.floor(done/total*1000)/10) + '%');
+				        };
+				    }
+
+				    xhr.onreadystatechange = function(e) {
+				        if ( 4 == this.readyState ) {
+				            console.log(['xhr upload complete', e]);
+				        }
+				    };
+
+				    xhr.open('post', '/upload', true);
+				    xhr.send(file);		
 				}
 
-			    reader.readAsDataURL(f);
-			}
-		}
+				var file = $('#file')[0].files[0];
+				var fd = new FormData();
+				fd.append('image', file);
+				send(fd);
 
-		var dropIt = function (e) {
-			console.log(e);
-			console.log(e.dataTransfer);
-			fileSelect(e.dataTransfer.files);
-			e.stopPropagation();  
-			e.preventDefault(); 
-		}
 
-		var dropItQuery = function (e) {
-			var ev = e.originalEvent;
-			console.log(ev);
-			ev.stopPropagation();
-			ev.preventDefault();
-			return false;
-		}
-		
+				
+				// send(file);
 
-		$(function () {
-			$('button#clear').click(function (e) {
-				console.log(e);
-				var control = $(".file");
-				control.replaceWith(control.val('').clone(true));
-			})				
-
-			$('button#check').click(function () {
-				if ($('.file')[0].files) alert('support!');
+				return false;
 			})
-
-			$('button#check_xhr2').click(function () {
-				supportXHR2();
-			})
-
-			// drop
-			// $('#drop-area')[0].addEventListener('drop', dropIt, false);
-			$('#drop-area').on('drop', dropItQuery);
-
-
-			// drag over
-			// $('#drop-area').on('dragover', function (e) {
-			// 	$(this).addClass('is-occupy');
-			// });
-			// $('#drop-area')[0].addEventListener('dragover', function (e) {
-			// 	$(this).addClass('is-occupy');
-			// }, false);
 		})
-
 	</script>
 </head>
 <body>
-	<button id="clear" class="btn">clear</button>
-	<button id="check" class="btn">check FileList</button>
-	<button id="check_xhr2" class="btn">check XHR2</button>
 	<form target="upload-frame" method="post" action="/upload" enctype="multipart/form-data">
 		<input id="file" class="file" type="file" name="image" multiple>
-		<input type="submit" value="提交">
+		<input id="submit" type="submit" value="提交">
 	</form>
 	<iframe width="50" height="50" name="upload-frame" src=""></iframe>
-	<div id="drop-area" ondragenter="return false" ondragover="return false">drop here</div>
 </body>
 </html>

@@ -28,7 +28,13 @@ window.xhr = (function () {
 	        }
 	    };
 	    xhr.open('post', '/upload', true);
-	    xhr.send(file);		
+	    /* Blob*/
+	    // xhr.send(file);		
+
+	    // formdata
+	    var fd = new FormData();
+		fd.append('image', file);
+		xhr.send(fd);
 	}
 
 	return {

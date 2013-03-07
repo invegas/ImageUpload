@@ -20,8 +20,9 @@ var validate = function (img) {
 }
 
 app.post("/upload", function (req, res) {
+    console.log(req.files);
     var image = req.files.image;
-    console.log(image);
+
     //首先要处理单个上传和多个上传
     // console.log(image);
     // console.log(image.length);
