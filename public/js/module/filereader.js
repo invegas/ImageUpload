@@ -3,11 +3,11 @@ window.fileReader = (function () {
 	var _maxSize = config_global.file.maxSize,
 		_type = config_global.file.type;
 
-	var readDataUrl = function (file, fn) {
+	var readDataUrl = function (file, fn, clas) {
 		var reader = new FileReader();
 
 		reader.onload = function (e) {
-			if (fn)	fn(e.target.result);
+			if (fn)	fn(clas, e.target.result);
 		};
 
 	    reader.readAsDataURL(file);

@@ -135,9 +135,6 @@ window.config_html5 = {
 			preview: {
 				type: 'img'
 			},
-			select: {
-				type: 'button'
-			},
 			progress: {
 				type: 'text',
 				value: '上传成功'

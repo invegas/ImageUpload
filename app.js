@@ -14,10 +14,6 @@ app.configure(function(){
 });
 
 
-var validate = function (img) {
-  // type
-  // size
-}
 
 app.post("/upload", function (req, res) {
     console.log(req.files);

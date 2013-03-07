@@ -21,10 +21,10 @@ window.Drag = (function () {
 		el.on('dragenter', function (e) {
 			return false;
 		}).on('dragover', function (e) {
-			$(this).addClass('cpt-upload-over');
+			$(this).addClass('cpt-upload-over').find('.text').text('释放吧');
 			return false;
 		}).on('dragleave', function () {
-			$(this).removeClass('cpt-upload-over');
+			$(this).removeClass('cpt-upload-over').find('.text').text('还可以把图片拖拽到这');
 		}).on('drop', function (e) {
 			$(this).removeClass('cpt-upload-over');
 			var ev = e.originalEvent,

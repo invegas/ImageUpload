@@ -26,6 +26,9 @@ body {
 .cpt-upload-over {
 	border-color: rgba(255,255,255,.8);	
 }
+.cpt-upload-over .text {
+	opacity: .8;
+}
 
 
 /*module*/
@@ -39,6 +42,7 @@ body {
 	background: none;
 	height: 200px;
 	position: relative;
+	overflow: hidden;
 }
 .cpt-progress {
 	margin-top: 20px;
@@ -48,6 +52,10 @@ body {
 }
 .cpt-preview {
 	position: absolute;
+	z-index: -1;
 	left: 0;
 	top: 0;
+	opacity: 0.1;
+	width: 100%;
+	height: 100%;
 }

@@ -18,7 +18,11 @@ window.Engine = (function () {
 	}
 
 	var sendData = function () {
-		xhr.send(_file);
+		var fd = new FormData();
+		fd.append('image', _file);
+
+		xhr.send(fd);
+		gotoStatus('upload');
 	}
 
 	var executeFn = function (fn, param) {
@@ -82,7 +86,7 @@ window.Engine = (function () {
 					Render.text(clas, content)
 				} else if (type === "img") {
 					Render.show(clas);
-					// fileReader.readDataUrl()
+					fileReader.readDataUrl(_file, Render.preview, clas);
 				} else if (type === "button") {
 					Render.show(clas);
 					if (available_cpt[name].value) Render.button(clas, available_cpt[name].value)

@@ -11,30 +11,30 @@ window.xhr = (function () {
 	    xhr.addEventListener('progress', function(e) {
 	        var done = e.position || e.loaded, 
 	        	total = e.totalSize || e.total;
+	        var percent = (Math.floor(done/total*1000)/10);
 
-	        console.log('xhr progress: ' + (Math.floor(done/total*1000)/10) + '%');
+            console.log('percent');
+            Render.progress(percent);
 	    }, false);
 
 	    if ( xhr.upload ) {
 	        xhr.upload.onprogress = function(e) {
 	            var done = e.position || e.loaded, total = e.totalSize || e.total;
-	            console.log('xhr.upload progress: ' + done + ' / ' + total + ' = ' + (Math.floor(done/total*1000)/10) + '%');
+	            var percent = Math.floor(done/total*1000)/10;
+	            
+	            console.log('percent');
+	            Render.progress(percent);
 	        };
 	    }
 
 	    xhr.onreadystatechange = function(e) {
 	        if ( 4 == this.readyState ) {
-	            console.log(['xhr upload complete', e]);
+	        	Engine.gotoStatus('complete');
+	            // console.log(['xhr upload complete', e]);
 	        }
 	    };
 	    xhr.open('post', '/upload', true);
-	    /* Blob*/
-	    // xhr.send(file);		
-
-	    // formdata
-	    var fd = new FormData();
-		fd.append('image', file);
-		xhr.send(fd);
+	    xhr.send(file);		
 	}
 
 	return {

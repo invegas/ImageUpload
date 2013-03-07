@@ -28,14 +28,21 @@ window.Render = (function () {
 		$('.' + btn + '').val(content);
 	}
 
-	var progress = function () {
-		
+	var progress = function (percent) {
+		$('.cpt-progress .bar').css('width', percent + "%");
+	}
+
+	var preview = function (clas, src) {
+		var time = +new Date();
+		$('.' + clas + '')[0].style.backgroundImage = 'url(' + src + ')';
 	}
 
 	return {
 		show: show,
 		hide: hide,
 		text: text,
-		button: button
+		button: button,
+		preview: preview,
+		progress: progress
 	}
 })()
