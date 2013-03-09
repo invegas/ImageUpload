@@ -4,6 +4,7 @@ app.listen(8000);
 
 app.configure(function(){
     app.set('views', __dirname + '/views');
+    app.use(express.methodOverride());
     app.use(express.bodyParser({
         uploadDir: "public/images",
         keepExtensions: true,
@@ -16,15 +17,7 @@ app.configure(function(){
 
 
 app.post("/upload", function (req, res) {
-    console.log(req.files);
-    var image = req.files.image;
-
-    //首先要处理单个上传和多个上传
-    // console.log(image);
-    // console.log(image.length);
-
-    if (Array.isArray(image)) console.log("is array");
-    else console.log("is not array");
+    console.log(req);
 
     res.send("ok");
 })
