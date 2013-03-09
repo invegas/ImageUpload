@@ -28,9 +28,16 @@ window.xhr = (function () {
 	    }
 
 	    xhr.onreadystatechange = function(e) {
+	    	
 	        if ( 4 == this.readyState ) {
 	        	Engine.gotoStatus('complete');
-	            // console.log(['xhr upload complete', e]);
+	        	if (this.response) {
+	        		console.log(JSON.parse(this.response));
+	        	}
+
+	        	if (this.responseText) {
+	        		console.log(JSON.parse(this.responseText));	
+	        	}
 	        }
 	    };
 	    xhr.open('post', '/upload', true);

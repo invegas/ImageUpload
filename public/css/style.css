@@ -3,6 +3,7 @@ body {
 	background: #22303B;
 	font-family: "微软雅黑";
 	color: white;
+	position: relative;
 }
 .navbar-inner.navbar-inner-padding {
 	padding: 0 20px;
