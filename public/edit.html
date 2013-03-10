@@ -12,7 +12,7 @@
 		.panel-side {
 			width: 260px;
 			position: fixed;
-			top: 100px;
+			top: 60px;
 			left: 10px;
 
 			margin-left: 0;
@@ -63,28 +63,36 @@
 		<div class="modal-body">
 			<div class="alert alert-info fontSize12">
 			  <button type="button" class="close" data-dismiss="alert">&times;</button>
-			  <strong>小技巧</strong> 可按住"+"或"-"按钮，同时左右拖动，也可调整相应值
+			  <strong>小技巧</strong>
+			  <ul>
+			  	<li>可按住"+"或"-"按钮，同时左右拖动，也可调整相应值</li>
+			  	<li>鼠标滚轮也可调整</li>
+			  </ul>
 			</div>
 			<div class="wrap">
 				<button class="btn btn-reset">还原</button>
-				<button class="btn" href="#"><i class="icon-minus"></i></button>			
-				<input type="text" class="input-minest margin-empty input-zoom" value="100%" disabled>
-				<button class="btn btn-small" href="#"><i class="icon-plus"></i></button>
+				<button class="btn btn-width btn-width-minus"><i class="icon-minus"></i></button>			
+				<input type="text" class="input-minest margin-empty input-width-val" value="100%" disabled>
+				<button class="btn btn-width btn-small btn-width-plus"><i class="icon-plus"></i></button>
 			</div class="wrap">
 			<div class="wrap">
 				<label class="explain">保存格式</label>
-				<select class="input-small margin-empty">
-					<option>JPG</option>
-					<option>PNG</option>
-					<option></option>
+				<select class="input-small margin-empty select-format">
+					<option value="jpg">JPG</option>
+					<option value="png">PNG</option>
+					<option value="bmp">bmp</option>
 				</select>
 			</div>
 			<div class="wrap">
 				<label class="explain">图片质量</label>
-				<button class="btn" href="#"><i class="icon-minus"></i></button>			
-				<input type="text" class="input-minest margin-empty input-zoom" value="0.1" disabled>
-				<button class="btn" href="#"><i class="icon-plus"></i></button>				
+				<button class="btn btn-quality-minus " href="#"><i class="icon-minus"></i></button>			
+				<input type="text" class="input-minest margin-empty input-quality-val" value="1" disabled>
+				<button class="btn btn-quality-plus" href="#"><i class="icon-plus"></i></button>				
 			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary btn-small pull-left">导出</button>
+			<button class="btn btn-default btn-small pull-right">还原默认值</button>
 		</div>
 	</div>
 	<script type="text/javascript" src="/js/lib/jquery-1.9.1.min.js"></script>	
@@ -92,16 +100,53 @@
 	<!--<script type="text/javascript" src="/js/lib/bootstrap-tooltip.js"></script>	-->
 	<script type="text/javascript" src="/js/module/zoom.js"></script>
 	<script type="text/javascript">
+
 		$(function () {
+
 			$('.alert').alert();
-			// $('.tip').tooltip();
-			//http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif
+
+			zoom.initMouse('btn-width');
 			zoom.insertImg("http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif", $('body'));
-			// zoom.insertImg("https://www.google.com.hk/images/srpr/logo4w.png", $('body'));
-			// zoom.insertImg("http://www.bjsubway.com/uploadfiles/2012bjsubwayroute.jpg", $('body'));
 			zoom.initWheel();		
 
 			$('.btn-reset').click(function () {
+				zoom.reset();
+			})
+
+			$('.btn-width-plus').click(function () {
+				zoom.widthPlus(5);
+				zoom.adjustZoom();
+				
+			})
+
+			$('.btn-width-minus').click(function () {
+				zoom.widthMinus(5);
+				zoom.adjustZoom();
+			})
+
+			$('.btn-quality-plus').click(function () {
+				var val = $('.input-quality-val').val();
+				val = parseFloat(val);
+
+				val = val + 0.1;
+
+				if (val >= 1) $('.input-quality-val').val(1);
+				else $('.input-quality-val').val(val.toFixed(1));
+			})
+
+			$('.btn-quality-minus').click(function () {
+				var val = $('.input-quality-val').val();
+				val = parseFloat(val);
+
+				val = val - 0.1;
+				
+				if (val <= 0.1) $('.input-quality-val').val(0.1);
+				else $('.input-quality-val').val(val.toFixed(1));
+			})		
+
+			$('.btn-default').click(function () {
+				$('.select-format').val("jpg");
+				$('.input-quality-val').val(1);
 				zoom.reset();
 			})
 		})
