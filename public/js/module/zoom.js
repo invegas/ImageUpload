@@ -65,7 +65,8 @@ window.zoom = (function () {
 			    'margin-left': _width * (-1) / 2 + "px",
 			    'margin-top': '100px'
 			});
-			$(this).addClass('animate');
+			$(this).addClass('animate').addClass('target');
+			$('.target').Jcrop();
 		}
 
 		img.src = src;
