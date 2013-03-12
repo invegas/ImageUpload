@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JCROP</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">	
+	<link rel="stylesheet" type="text/css" href="/css/jquery.Jcrop.css">
+	<script type="text/javascript" src="/js/lib/jquery-1.9.1.min.js"></script>	
+	<script type="text/javascript" src="/js/lib/jquery.Jcrop.min.js"></script>
+	<style type="text/css">
+		#target {
+			margin: 0 auto;
+		}
+		.wrap {
+			position: absolute;
+			left: 50px;
+			top: 50px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(function () {
+			var jcrop_apil;
+
+			$('#target').Jcrop({}, function () {
+				jcrop_api = this;
+			});
+
+			$("#clear").click(function () {
+				jcrop_api.release();
+			});
+
+			$("#confirm").click(function () {
+				jcrop_api.tellSelect();
+			});
+		})
+	</script>
+</head>
+<body>
+	<button id="clear">clear</button>
+	<button id="confirm">确定</button>
+	<div class="wrap">
+		<img id="target" src="/images/sample.jpg">
+	</div>
+</body>
+</html>
